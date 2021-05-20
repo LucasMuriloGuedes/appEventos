@@ -1,15 +1,13 @@
 package com.eventoapp.eventoapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Evento implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long codigo;
 
     private String nome;
@@ -17,14 +15,10 @@ public class Evento implements Serializable {
     private String data;
     private String horario;
 
-    private Evento(){
-    }
+    @OneToMany
+    private List<Convidado> convidados;
 
-    public Evento(String nome, String local, String data, String horario) {
-        this.nome = nome;
-        this.local = local;
-        this.data = data;
-        this.horario = horario;
+    private Evento(){
     }
 
     public Long getCodigo() {
@@ -66,4 +60,6 @@ public class Evento implements Serializable {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
+
 }
